@@ -43,15 +43,37 @@ const Calculator = () => {
         }
     }
 
+    function isFloat(n) {
+        return parseFloat(n.match(/^-?\d*(\.\d+)?$/))>0;
+    }
+      
+
     const handleTextbox = (e) => {
-        if(e.target.value < 0){
-            const replaceNegativeNumber = e.target.value.replace(/^0$|^-?[1-9]\d*(\.\d+)?$/, 1)
-            setValue(replaceNegativeNumber);
+        let valueNum = e.target.value
+        if(isFloat(valueNum)){
+            const roundNum = Math.round(valueNum)
+            setValue(roundNum)
+            handleCheckMain(type, roundNum)
         }else{
-            const onlyNums = e.target.value.replace(/[^1-9-]+/g, '')
-            setValue(onlyNums)
+            setValue(valueNum)
+            if(valueNum < 0 || isNaN(valueNum)){
+                setValue(1)
+            }
+            handleCheckMain(type, 1)
         }
-        handleCheckMain(type, e.target.value)
+        // console.log(isFloat(valueNum))
+        // if(isFloat(valueNum)){
+        //     console.log(Math.round(valueNum))
+        // }
+        // setValue(Math.round(valueNum))
+        // if(e.target.value < 0){
+        //     const replaceNegativeNumber = e.target.value.replace(/^0$|^-?[1-9]\d*(\.\d+)?$/, 1)
+        //     setValue(replaceNegativeNumber);
+        // }else{
+        //     const onlyNums = e.target.value.replace(/[^1-9-]+/g, '')
+        //     setValue(onlyNums)
+        // }
+        // handleCheckMain(type, e.target.value)
     }
 
     const handleSelect = (e) => {
