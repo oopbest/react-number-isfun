@@ -56,7 +56,7 @@ const Calculator = () => {
             handleCheckMain(type, roundNum)
         }else{
             setValue(valueNum)
-            if(valueNum < 1 || isNaN(valueNum)){
+            if(valueNum < 0 || isNaN(valueNum)){
                 setValue(1)
             }
             handleCheckMain(type, 1)
